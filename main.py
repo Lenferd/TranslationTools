@@ -5,6 +5,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 # from BinaryParser import binaryReaderLib as binaryParser
 from BinaryParser import readFile as freader
 from BinaryParser import binary_parser as bparser
+from TextFiltres import text_filter
 
 filepatch = "./examples"
 
@@ -19,4 +20,12 @@ if __name__ == "__main__":
     # get strings
     strings = bparser.parse_binary_list(binary_data)
 
-    print(strings)
+    result, removed = text_filter.oxenfree_filter(strings)
+
+
+    # now we can use filtres
+    print(result)
+    print(removed)
+    for data in result:
+        for line in data:
+            print(line)

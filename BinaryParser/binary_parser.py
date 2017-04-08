@@ -13,6 +13,7 @@ MIN_STR = 2
 MAX_STR = 1024000
 DEBUG = False
 
+
 def parse_size_bloc(data):
     return data[0] + 256 * data[1]
 
@@ -46,7 +47,7 @@ def parse_binary_list(binary_list):
                 i += 4
                 continue
 
-            #   check out of boundarie
+            # check out of boundarie
             if not bcheck.is_out_of_boundaries(i, size, binary_size):
                 i += 4
                 continue
@@ -62,7 +63,7 @@ def parse_binary_list(binary_list):
             #         continue
 
             # check fake symbol in string
-            byte_str = binary[i + 4:end_block+1]
+            byte_str = binary[i + 4:end_block + 1]
 
             if DEBUG:
                 print("===")
