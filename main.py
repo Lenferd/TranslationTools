@@ -1,10 +1,10 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
-from PyQt5 import QtCore, QtGui, QtWidgets
 # from BinaryParser import binaryReaderLib as binaryParser
-from BinaryParser import readFile as freader
 from BinaryParser import binary_parser as bparser
+from FilesOperation import readFile as freader
+from FilesOperation import writeFile as fwriter
 from TextFiltres import text_filter
 
 filepatch = "./examples"
@@ -20,12 +20,8 @@ if __name__ == "__main__":
     # get strings
     strings = bparser.parse_binary_list(binary_data)
 
+    # now we can use filtres
     result, removed = text_filter.oxenfree_filter(strings)
 
-
-    # now we can use filtres
-    print(result)
-    print(removed)
-    for data in result:
-        for line in data:
-            print(line)
+    fwriter.write_data(result, "result")
+    fwriter.write_data(removed, "removed")
