@@ -85,8 +85,9 @@ def parse_binary_list(binary_list):
             try:
                 string = byte_str.decode("UTF-8")
             except UnicodeDecodeError:
-                print("error decode")
-                print(byte_str)
+                if DEBUG:
+                    print("error decode")
+                    print(byte_str)
                 i += 4
                 continue
 

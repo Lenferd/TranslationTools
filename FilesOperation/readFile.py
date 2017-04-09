@@ -15,6 +15,7 @@ def read_binary_file(filename):
     # get all bytestring
     for x in infile:
         data = data + x
+    infile.close()
     return data
 
 
@@ -28,6 +29,7 @@ def read_binary_files(files_list):
         for x in infile:
             data = data + x
         binary_data.append(data)
+        infile.close()
 
     return binary_data
 

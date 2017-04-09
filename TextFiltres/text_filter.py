@@ -19,17 +19,21 @@ def oxenfree_filter(text_data):  # text_data is list of lists
 
         for line in text:
             if is_have_only_numbers_or_symbols(line):
-                local_removed_lines.append("OS: " + line)  # don't have letter
+                local_removed_lines.append("OnS: " + line)  # don't have letter
                 continue
             if is_have_unity_system_string(line):
-                local_removed_lines.append("US: " + line)  # Unity system
+                local_removed_lines.append("UnS: " + line)  # Unity system
                 continue
             if is_have_different_registry_merged_words(line):
-                local_removed_lines.append("MW: " + line)  # Merged words
+                local_removed_lines.append("MeW: " + line)  # Merged words
                 continue
             if is_have_three_upcase(line):
-                local_removed_lines.append("UC: " + line)  # Upcase str
+                local_removed_lines.append("UpC: " + line)  # Upcase str
                 continue
+            if is_have_underscore(line):
+                local_removed_lines.append("UnS: " + line)  # have underscore
+                continue
+
             local_lines.append(line)
 
         result_lines.append(local_lines)
@@ -65,6 +69,13 @@ def is_have_unity_system_string(line):
 # REN CLARISSSA
 def is_have_three_upcase(line):
     if re.search(r".*[A-Z][A-Z][A-Z].*", line) is not None:
+        return True
+    else:
+        return False
+
+# Boat_8PM_Ren
+def is_have_underscore(line):
+    if re.search(r".*_.*", line) is not None:
         return True
     else:
         return False
