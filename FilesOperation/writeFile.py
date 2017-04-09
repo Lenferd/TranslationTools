@@ -8,6 +8,7 @@
 #   Автор:      Lenferd (DeysonSH@gmail.com)
 
 import os
+import FilesOperation.find as find
 
 
 def write_data(data_list, filename):
@@ -21,7 +22,7 @@ def write_data(data_list, filename):
 def write_data_with_filename(data_list, filename_list, filename):
     outfile = open(os.path.curdir + "/result/" + filename + ".txt", 'w')
     for i in range(len(data_list)):
-        outfile.write("===" + find_directory_with_filename(filename_list[i]) + "===" + '\n')
+        outfile.write("===" + find.find_directory_with_filename(filename_list[i]) + "===" + '\n')
         if len(data_list[i]) == 0:
             outfile.write("***EMPTY FILE***\n")
         for line in data_list[i]:
@@ -29,27 +30,15 @@ def write_data_with_filename(data_list, filename_list, filename):
     outfile.close()
 
 
-def find_filename(long_path):
-    return long_path[long_path.rfind("/") + 1:]
-
-
-#   TODO не уверен, что он работает
-def find_directory_name(long_path):
-    buf = long_path[:long_path.rfind("/")]
-    buf = buf[buf.rfind("/") + 1:]
-    return buf
-
-
-def find_directory_with_filename(long_path):
-    return find_directory_name(long_path) + find_filename(long_path)
-
-
-def find_empty_files(data_list, filename_list):
-    empty_files = []
+def write_data_with_filename_wo_empty(data_list, filename_list, filename):
+    outfile = open(os.path.curdir + "/result/" + filename + ".txt", 'w')
     for i in range(len(data_list)):
         if len(data_list[i]) == 0:
-            empty_files.append(filename_list[i])
-    return empty_files
+            continue
+        outfile.write("===" + find.find_directory_with_filename(filename_list[i]) + "===" + '\n')
+        for line in data_list[i]:
+            outfile.write(line + '\n')
+    outfile.close()
 
 
 def write_list(data, filename):
