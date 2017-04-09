@@ -73,6 +73,12 @@ def parse_binary_list(binary_list):
                 print(byte_str)
                 print("size:")
                 print(size)
+
+            # check 00 in str
+            if not bcheck.is_not_have_system_in_str(byte_str):
+                i += 4
+                continue
+
             # checked only fist two symbol
             if not bcheck.is_start_string_dont_have_system_symbols(byte_str[0:2]):
                 i += 4

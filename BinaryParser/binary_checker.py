@@ -34,3 +34,8 @@ def is_size_in_the_boundaries(size, *, min_lenght=1, max_lenght):
         return True
     else:
         return False
+
+
+def is_not_have_system_in_str(data):
+    test = data.find(b'\x00')
+    return True if test < 0 else False

@@ -17,7 +17,7 @@ filepatch = "/mnt/sda3/TT/TT_OF4/Unity_Assets_Files/"
 # filepatch = "./examples"
 
 #   out path
-prefix = "test3"     # folder in the result
+prefix = "testLvl"     # folder in the result
 postfix = "fileinfo"        # underfolder in the prefix folder (for file info)
 
 if __name__ == "__main__":
@@ -39,9 +39,14 @@ if __name__ == "__main__":
     removed, ordering_removed = text_filter.ordering_by_filetype(removed, file_list)
 
     # print data
+    fwriter.write_data_only_one_writted_type_sorted(
+        result_quo, ordering_result_quo, "result_quo_all", prefix=prefix, postfix="quotes")
     fwriter.write_data_to_many_file_witch_sorting_ordering(
         result_quo, ordering_result_quo, "result_quo", prefix=prefix, postfix="quotes")
+
+    fwriter.write_data_only_one_writted_type_sorted(result, ordering_result, "result_all", prefix=prefix)
     fwriter.write_data_to_many_file_witch_sorting_ordering(result, ordering_result, "result", prefix=prefix)
+
     fwriter.write_data_with_filename_wo_empty(removed, ordering_removed, "removed", prefix=prefix)
 
     # print filetype

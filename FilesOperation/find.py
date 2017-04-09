@@ -59,10 +59,9 @@ def construct_file_three(path, *, ignoring_directories=[]):
     for directory in dirs_list:
         if directory in ignoring_directories:
             continue
-        for root, dirs, files in os.walk(path + directory):
+        for root, dirs, files in os.walk(path + '/' + directory):
             for name in files:
                 files_list.append(os.path.join(root, name))
-
     return files_list
 
 

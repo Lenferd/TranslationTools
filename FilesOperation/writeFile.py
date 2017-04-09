@@ -53,8 +53,8 @@ def write_data_with_filename_wo_empty(data_list, filename_list, filename, *, pre
 
 
 #   Не знаю как назвать, выводится тип файлов и только один раз, только для ОТСОРТИРОВАННЫХ
-def write_data_only_one_writted_type_sorted(data_list, filename_list_sorted, filename, *, prefix=""):
-    path = os.path.curdir + directory + prefix + '/'
+def write_data_only_one_writted_type_sorted(data_list, filename_list_sorted, filename, *, prefix="", postfix=""):
+    path = os.path.curdir + directory + prefix + '/' + postfix + '/'
     create_directory(path)
 
     outfile = open(path + filename + ".txt", 'w')
@@ -73,6 +73,7 @@ def write_data_only_one_writted_type_sorted(data_list, filename_list_sorted, fil
     outfile.close()
 
 
+#   запиись во множество файлов. Каждый файл - для своего формата
 def write_data_to_many_file_witch_sorting_ordering(data_list, filename_list_sorted, filename, *, prefix="", postfix=""):
     path = os.path.curdir + directory + prefix + '/' + postfix + '/'
     create_directory(path)

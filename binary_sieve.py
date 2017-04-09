@@ -18,5 +18,5 @@ if __name__ == '__main__':
     # delfile.del_file_from_list(del_list)
 
     # del from format
-    del_format = fread.read_file_rstrip("./files_info/resources/toDel.txt")
+    del_format = fread.read_file_rstrip("./Info/3r.txt")
     delfile.del_file_from_list_of_types(del_format, "/mnt/sda3/TT/TT_OF4/Unity_Assets_Files/resources")
