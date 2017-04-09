@@ -1,5 +1,10 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
+#   Программа:  OxenfreeUnpacker
+#   Назначение: Вытаскиваем текст из файлов
+#   Версия:     3.0
+#   Дата:       8.04.17
+#   Автор:      Lenferd (DeysonSH@gmail.com)
 
 # from BinaryParser import binaryReaderLib as binaryParser
 from BinaryParser import binary_parser as bparser

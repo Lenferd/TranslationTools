@@ -50,3 +50,9 @@ def construct_file_three(path):
 
     return files_list
 
+
+def read_file_rstrip(filename):
+    file = open(filename, 'r', encoding="UTF8")
+    data = [s.rstrip() for s in file.readlines()]
+    file.close()
+    return data

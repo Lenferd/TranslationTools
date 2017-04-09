@@ -15,7 +15,7 @@ DEBUG = False
 
 
 def parse_size_bloc(data):
-    return data[0] + 256 * data[1]
+    return int.from_bytes(data, byteorder='little')
 
 
 def parse_binary_list(binary_list):
