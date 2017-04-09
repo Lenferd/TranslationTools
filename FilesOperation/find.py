@@ -47,21 +47,24 @@ def find_all_type(filename_list):
     return datatype_list
 
 
-def construct_file_three(path):
+def construct_file_three(path, *, ignoring_directories=[]):
     files_list = []
     # first - find files in root dir
-    for root, dirs, files in os.walk(path):
-        for name in files:
-            files_list.append(os.path.join(root, name))
+
+    for item in os.listdir(path):
+        if os.path.isfile(os.path.join(path, item)):
+            files_list.append(os.path.join(path, item))
 
     dirs_list = os.listdir(path=path)
-
     for directory in dirs_list:
-        for root, dirs, files in os.walk(path + '\\' + directory):
+        if directory in ignoring_directories:
+            continue
+        for root, dirs, files in os.walk(path + directory):
             for name in files:
                 files_list.append(os.path.join(root, name))
 
     return files_list
+
 
 def atoi(text):
     return int(text) if text.isdigit() else text

@@ -32,7 +32,9 @@ def ordering_by_filetype(text_data, files_name):
     return ordered_data, ordered_filelist
 
 
-def oxenfree_filter(text_data):  # text_data is list of lists
+def filter_text(text_data, *,
+                h_symbols=True,
+                n_system_str=True, n_merged_reg=True, n_more_three_upcase=True, n_underscore=True):
     removed_lines = []
     result_lines = []
 
@@ -41,21 +43,26 @@ def oxenfree_filter(text_data):  # text_data is list of lists
         local_removed_lines = []
 
         for line in text:
-            if is_have_only_numbers_or_symbols(line):
-                local_removed_lines.append("OnS: " + line)  # don't have letter
-                continue
-            if is_have_unity_system_string(line):
-                local_removed_lines.append("UnS: " + line)  # Unity system
-                continue
-            if is_have_different_registry_merged_words(line):
-                local_removed_lines.append("MeW: " + line)  # Merged words
-                continue
-            if is_have_three_upcase(line):
-                local_removed_lines.append("UpC: " + line)  # Upcase str
-                continue
-            if is_have_underscore(line):
-                local_removed_lines.append("UnS: " + line)  # have underscore
-                continue
+            if h_symbols:
+                if is_have_only_numbers_or_symbols(line):
+                    local_removed_lines.append("OnS: " + line)  # don't have letter
+                    continue
+            if n_system_str:
+                if is_have_unity_system_string(line):
+                    local_removed_lines.append("USy: " + line)  # Unity system
+                    continue
+            if n_merged_reg:
+                if is_have_different_registry_merged_words(line):
+                    local_removed_lines.append("MeW: " + line)  # Merged words
+                    continue
+            if n_more_three_upcase:
+                if is_have_three_upcase(line):
+                    local_removed_lines.append("UpC: " + line)  # Upcase str
+                    continue
+            if n_underscore:
+                if is_have_underscore(line):
+                    local_removed_lines.append("UnS: " + line)  # have underscore
+                    continue
 
             local_lines.append(line)
 
@@ -63,6 +70,46 @@ def oxenfree_filter(text_data):  # text_data is list of lists
         removed_lines.append(local_removed_lines)
 
     return result_lines, removed_lines
+
+
+#   {"id"
+def get_quotes_blocks_with_text(text_data, *, start_pattern=r""):
+    removed_lines = []
+    result_lines = []
+
+    for text in text_data:
+        local_lines = []
+        local_removed_lines = []
+
+        for line in text:
+            if not is_start_equal_pattern(line, start_pattern):
+                local_removed_lines.append(line)  # Not equal start NEQ
+                continue
+            if not is_have_close_quotes_at_edge(line):
+                local_removed_lines.append(line)  # Not closed quotes NCQ
+                continue
+
+            local_lines.append(line)
+
+        removed_lines.append(local_removed_lines)
+        result_lines.append(local_lines)
+    return result_lines, removed_lines
+
+
+def oxenfree_filter_resources(text_data):  # text_data is list of lists
+    return filter_text(text_data,
+                       h_symbols=True,
+                       n_system_str=True, n_merged_reg=True, n_more_three_upcase=True, n_underscore=True)
+
+
+def oxenfree_filter_lvl(text_data, *, start_str=r""):
+    quotes_str, quotes_removed = get_quotes_blocks_with_text(text_data, start_pattern=start_str)
+
+    result_lines, removed_lines = filter_text(quotes_removed,
+                                              h_symbols=True,
+                                              n_system_str=True, n_merged_reg=True, n_more_three_upcase=True,
+                                              n_underscore=True)
+    return quotes_str, result_lines, removed_lines
 
 
 # filter abcCde   (merged low and big case)
@@ -100,9 +147,25 @@ def is_have_three_upcase(line):
     else:
         return False
 
+
 # Boat_8PM_Ren
 def is_have_underscore(line):
     if re.search(r".*_.*", line) is not None:
+        return True
+    else:
+        return False
+
+
+def is_start_equal_pattern(line, pattern):
+    if re.search(pattern, line) is not None:
+        return True
+    else:
+        return False
+
+
+# {}
+def is_have_close_quotes_at_edge(line):
+    if re.search(r"\{.*\}", line) is not None:
         return True
     else:
         return False

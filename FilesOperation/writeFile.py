@@ -73,12 +73,11 @@ def write_data_only_one_writted_type_sorted(data_list, filename_list_sorted, fil
     outfile.close()
 
 
-def write_data_to_many_file_witch_sorting_ordering(data_list, filename_list_sorted, filename, *, prefix=""):
-    path = os.path.curdir + directory + prefix + '/'
+def write_data_to_many_file_witch_sorting_ordering(data_list, filename_list_sorted, filename, *, prefix="", postfix=""):
+    path = os.path.curdir + directory + prefix + '/' + postfix + '/'
     create_directory(path)
 
     # outfile = open(path + filename + ".txt", 'w')
-
     global_ftype = ''
     for i in range(len(data_list)):
         if len(data_list[i]) == 0:
@@ -90,7 +89,10 @@ def write_data_to_many_file_witch_sorting_ordering(data_list, filename_list_sort
             outfile = open(path + filename + "_" + global_ftype + ".txt", 'w')
         for line in data_list[i]:
             outfile.write(line + '\n')
-    outfile.close()
+    try:
+        outfile.close()
+    except UnboundLocalError:
+        print(filename + " is empty")
 
 
 def write_list(data, filename, *, prefix="", postfix=""):
