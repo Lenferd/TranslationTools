@@ -8,9 +8,20 @@
 #   Автор:      Lenferd (DeysonSH@gmail.com)
 
 import os
+from FilesOperation import find as ffind
 
 
-#   @parma del_list contain full path
+#   @param del_list contain full path
 def del_file_from_list(del_list):
     for file in del_list:
         os.remove(file)
+
+
+#   @param del_list contain type of file
+def del_file_from_list_of_types(del_list, directory):
+    file_list = ffind.construct_file_three(directory)
+
+    for ftype in del_list:
+        for file in file_list:
+            if ffind.find_filetype(file) == ftype:
+                os.remove(file)

@@ -8,6 +8,7 @@
 #   Автор:      Lenferd (DeysonSH@gmail.com)
 
 import re
+import os
 
 
 def find_filename(long_path):
@@ -46,6 +47,22 @@ def find_all_type(filename_list):
     return datatype_list
 
 
+def construct_file_three(path):
+    files_list = []
+    # first - find files in root dir
+    for root, dirs, files in os.walk(path):
+        for name in files:
+            files_list.append(os.path.join(root, name))
+
+    dirs_list = os.listdir(path=path)
+
+    for directory in dirs_list:
+        for root, dirs, files in os.walk(path + '\\' + directory):
+            for name in files:
+                files_list.append(os.path.join(root, name))
+
+    return files_list
+
 def atoi(text):
     return int(text) if text.isdigit() else text
 
@@ -57,3 +74,4 @@ def natural_keys(text):
     (See Toothy's implementation in the comments)
     '''
     return [atoi(c) for c in re.split('(\d+)', text)]
+
