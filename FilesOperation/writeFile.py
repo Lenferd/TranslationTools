@@ -30,7 +30,7 @@ def write_data_with_filename(data_list, filename_list, filename, *, prefix=""):
 
     outfile = open(path + filename + ".txt", 'w')
     for i in range(len(data_list)):
-        outfile.write("===" + ffind.find_directory_with_filename(filename_list[i]) + "===" + '\n')
+        outfile.write("'===" + ffind.find_directory_with_filename(filename_list[i]) + "===" + '\n')
         if len(data_list[i]) == 0:
             outfile.write("***EMPTY FILE***\n")
         for line in data_list[i]:
@@ -46,7 +46,7 @@ def write_data_with_filename_wo_empty(data_list, filename_list, filename, *, pre
     for i in range(len(data_list)):
         if len(data_list[i]) == 0:
             continue
-        outfile.write("===" + ffind.find_directory_with_filename(filename_list[i]) + "===" + '\n')
+        outfile.write("'===" + ffind.find_directory_with_filename(filename_list[i]) + "===" + '\n')
         for line in data_list[i]:
             outfile.write(line + '\n')
     outfile.close()
@@ -67,7 +67,7 @@ def write_data_only_one_writted_type_sorted(data_list, filename_list_sorted, fil
         ftype = ffind.find_filetype(filename_list_sorted[i])
         if ftype != global_ftype:
             global_ftype = ftype
-            outfile.write("===" + global_ftype + "===" + '\n')
+            outfile.write("'===" + global_ftype + "===" + '\n')
         for line in data_list[i]:
             outfile.write(line + '\n')
     outfile.close()

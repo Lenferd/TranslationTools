@@ -45,23 +45,23 @@ def filter_text(text_data, *,
         for line in text:
             if h_symbols:
                 if is_have_only_numbers_or_symbols(line):
-                    local_removed_lines.append("OnS: " + line)  # don't have letter
+                    local_removed_lines.append("OnS:\t" + line)  # don't have letter
                     continue
             if n_system_str:
                 if is_have_unity_system_string(line):
-                    local_removed_lines.append("USy: " + line)  # Unity system
+                    local_removed_lines.append("USy:\t" + line)  # Unity system
                     continue
             if n_merged_reg:
                 if is_have_different_registry_merged_words(line):
-                    local_removed_lines.append("MeW: " + line)  # Merged words
+                    local_removed_lines.append("MeW:\t" + line)  # Merged words
                     continue
             if n_more_three_upcase:
                 if is_have_three_upcase(line):
-                    local_removed_lines.append("UpC: " + line)  # Upcase str
+                    local_removed_lines.append("UpC:\t" + line)  # Upcase str
                     continue
             if n_underscore:
                 if is_have_underscore(line):
-                    local_removed_lines.append("UnS: " + line)  # have underscore
+                    local_removed_lines.append("UnS:\t" + line)  # have underscore
                     continue
 
             local_lines.append(line)

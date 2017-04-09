@@ -10,7 +10,7 @@
 from BinaryParser import binary_parser as bparser
 from FilesOperation import readFile as freader
 from FilesOperation import writeFile as fwriter
-from TextFiltres import text_filter
+from TextOperations import text_filter
 from FilesOperation import find as ffind
 
 filepatch = "/mnt/sda3/TT/TT_OF4/Unity_Assets_Files/"

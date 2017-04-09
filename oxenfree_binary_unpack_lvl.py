@@ -10,14 +10,14 @@
 from BinaryParser import binary_parser as bparser
 from FilesOperation import readFile as freader
 from FilesOperation import writeFile as fwriter
-from TextFiltres import text_filter
+from TextOperations import text_filter
 from FilesOperation import find as ffind
 
 filepatch = "/mnt/sda3/TT/TT_OF4/Unity_Assets_Files/"
 # filepatch = "./examples"
 
 #   out path
-prefix = "testLvl"     # folder in the result
+prefix = "lvl_to_transl"     # folder in the result
 postfix = "fileinfo"        # underfolder in the prefix folder (for file info)
 
 if __name__ == "__main__":
@@ -31,7 +31,7 @@ if __name__ == "__main__":
     strings = bparser.parse_binary_list(binary_data)
 
     # now we can use filtres
-    result_quo, result, removed = text_filter.oxenfree_filter_lvl(strings)
+    result_quo, result, removed = text_filter.oxenfree_filter_lvl(strings, start_str=r"\{\"_id.*")
 
     # ordering
     result_quo, ordering_result_quo = text_filter.ordering_by_filetype(result_quo, file_list)
