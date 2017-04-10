@@ -10,7 +10,7 @@ files_directory = r'./input'
 
 from FilesOperation import readFile, writeFile, find
 from Upack_string import block_util
-from TextOperations import text_filter
+from TextOperations import text_filter, encoding_fix
 
 if __name__ == '__main__':
 
@@ -32,6 +32,7 @@ if __name__ == '__main__':
                     k -= 1
                 k += 1
 
+        resultData = encoding_fix.fix_codign_list(resultData)
         resultData, removed = text_filter.filter_text(resultData)
 
         writeFile.write_list_without_adding_newline(resultData, find.find_filename(file), prefix="out")

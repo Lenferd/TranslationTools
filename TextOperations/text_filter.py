@@ -141,7 +141,7 @@ def is_have_only_numbers_or_symbols(line):
 
 # Unity system    System.out....
 def is_have_unity_system_string(line):
-    if re.search(r".*[A-z]\.[A-z].*", line) is not None:
+    if re.search(r".*[A-Za-z]\.[A-Z].*", line) is not None:
         if re.search(r".*[A-z]\.\w.*", line) is not None:
             return True
         else:
