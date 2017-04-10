@@ -34,7 +34,7 @@ def ordering_by_filetype(text_data, files_name):
 
 def filter_text(text_data, *,
                  h_symbols=True,
-                 n_system_str=True, n_merged_reg=True, n_more_three_upcase=True, n_underscore=True):
+                 n_system_str=True, n_merged_reg=True, n_more_three_upcase=False, n_underscore=True):
     local_lines = []
     local_removed_lines = []
 
@@ -53,7 +53,7 @@ def filter_text(text_data, *,
                 continue
         if n_more_three_upcase:
             if is_have_three_upcase(line):
-                local_removed_lines.append("UpC:\t" + line)  # Upcase str
+                local_removed_lines.append("UpC:\t" + line)  # Upcase str (more that 3 Upcase) OFF DEFAULT
                 continue
         if n_underscore:
             if is_have_underscore(line):
