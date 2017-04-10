@@ -33,8 +33,8 @@ def ordering_by_filetype(text_data, files_name):
 
 
 def filter_text(text_data, *,
-                 h_symbols=True,
-                 n_system_str=True, n_merged_reg=True, n_more_three_upcase=False, n_underscore=True):
+                h_symbols=True,
+                n_system_str=True, n_merged_reg=True, n_more_three_upcase=False, n_underscore=True):
     local_lines = []
     local_removed_lines = []
 
@@ -72,7 +72,11 @@ def filter_texts(text_datas, *,
     result_lines = []
 
     for text in text_datas:
-        temp_result, temp_removed = filter_text(text, h_symbols, n_system_str, n_merged_reg, n_more_three_upcase, n_underscore)
+        temp_result, temp_removed = filter_text(text, h_symbols=h_symbols,
+                                                n_system_str=n_system_str,
+                                                n_merged_reg=n_merged_reg,
+                                                n_more_three_upcase=n_more_three_upcase,
+                                                n_underscore=n_underscore)
         result_lines.append(temp_result)
         removed_lines.append(temp_removed)
 

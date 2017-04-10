@@ -25,4 +25,4 @@ def fix_quotes(line):
 
 
 def fix_symbols(line):
-    return line.replace(r"\u2019", r"’")
+    return line.replace(r"\u2019", r"’").replace(r"\u2026", r"…")

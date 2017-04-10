@@ -9,7 +9,8 @@
 
 file_original = 'Orig/orig.txt'
 file_translated = 'Transl/transl.txt'
-file_new = 'toTransl/result_-9.txt'
+file_new = 'toTransl/result_dialog.txt'
+prefix = "lvl_dialog"
 
 from FilesOperation import readFile, writeFile
 from TextOperations.find_text import is_have_russian_symbols
@@ -35,9 +36,6 @@ def find_text(original_data, translated_data, originalNew_data):
             i += 1
 
     return result_data, original_data, translated_data
-
-
-prefix = "resources92"
 
 
 if __name__ == '__main__':
