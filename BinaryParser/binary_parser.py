@@ -23,6 +23,9 @@ def parse_binary_list(binary_list):
 
     for binary in binary_list:
 
+        if DEBUG:
+            print(binary)
+            print(binary)
         i = 0
         binary_size = len(binary)
         local_data_list = []
@@ -64,7 +67,6 @@ def parse_binary_list(binary_list):
 
             # check fake symbol in string
             byte_str = binary[i + 4:end_block + 1]
-
             if DEBUG:
                 print("===")
                 print("binary:")

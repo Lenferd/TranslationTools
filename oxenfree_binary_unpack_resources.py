@@ -14,10 +14,12 @@ from TextOperations import text_filter
 from FilesOperation import find as ffind
 
 filepatch = "/mnt/sda3/TT/TT_OF4/Unity_Assets_Files/resources"
+# filepatch = "/mnt/sda3/TT/TT_OF4/test"
+
 # filepatch = "./examples"
 
 #   out path
-prefix = "resources_to_transl"     # folder in the result
+prefix = "test"     # folder in the result
 postfix = "fileinfo"        # underfolder in the prefix folder (for file info)
 
 if __name__ == "__main__":

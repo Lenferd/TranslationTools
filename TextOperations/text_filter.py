@@ -99,7 +99,7 @@ def get_quotes_blocks_with_text(text_data, *, start_pattern=r""):
 def oxenfree_filter_resources(text_data):  # text_data is list of lists
     return filter_text(text_data,
                        h_symbols=True,
-                       n_system_str=True, n_merged_reg=True, n_more_three_upcase=True, n_underscore=True)
+                       n_system_str=True, n_merged_reg=True, n_more_three_upcase=False, n_underscore=True)
 
 
 def oxenfree_filter_lvl(text_data, *, start_str=r""):
@@ -107,7 +107,7 @@ def oxenfree_filter_lvl(text_data, *, start_str=r""):
 
     result_lines, removed_lines = filter_text(quotes_removed,
                                               h_symbols=True,
-                                              n_system_str=True, n_merged_reg=True, n_more_three_upcase=True,
+                                              n_system_str=True, n_merged_reg=False, n_more_three_upcase=True,
                                               n_underscore=True)
     return quotes_str, result_lines, removed_lines
 
@@ -134,8 +134,11 @@ def is_have_only_numbers_or_symbols(line):
 
 # Unity system    System.out....
 def is_have_unity_system_string(line):
-    if re.search(r".*\w\.\w.*", line) is not None:
-        return True
+    if re.search(r".*[A-z]\.[A-z].*", line) is not None:
+        if re.search(r".*[A-z]\.\w.*", line) is not None:
+            return True
+        else:
+            return True
     else:
         return False
 

@@ -96,6 +96,16 @@ def write_data_to_many_file_witch_sorting_ordering(data_list, filename_list_sort
         print(filename + " is empty")
 
 
+def write_list_without_adding_newline(data, filename, *, prefix="", postfix=""):
+    path = os.path.curdir + directory + prefix + '/' + postfix + '/'
+    create_directory(path)
+
+    outfile = open(path + filename + ".txt", 'w')
+    for line in data:
+        outfile.write(line)
+    outfile.close()
+
+
 def write_list(data, filename, *, prefix="", postfix=""):
     path = os.path.curdir + directory + prefix + '/' + postfix + '/'
     create_directory(path)

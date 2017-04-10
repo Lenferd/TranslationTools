@@ -25,3 +25,10 @@ def test_regexp(line, pattern):
         return True
     else:
         return False
+
+
+def is_have_russian_symbols(line):
+    if re.search(r".*[А-я].*", line) is not None:
+        return True
+    else:
+        return False
