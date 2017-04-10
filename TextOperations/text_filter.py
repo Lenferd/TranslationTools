@@ -33,41 +33,48 @@ def ordering_by_filetype(text_data, files_name):
 
 
 def filter_text(text_data, *,
-                h_symbols=True,
-                n_system_str=True, n_merged_reg=True, n_more_three_upcase=True, n_underscore=True):
+                 h_symbols=True,
+                 n_system_str=True, n_merged_reg=True, n_more_three_upcase=True, n_underscore=True):
+    local_lines = []
+    local_removed_lines = []
+
+    for line in text_data:
+        if h_symbols:
+            if is_have_only_numbers_or_symbols(line):
+                local_removed_lines.append("OnS:\t" + line)  # don't have letter
+                continue
+        if n_system_str:
+            if is_have_unity_system_string(line):
+                local_removed_lines.append("USy:\t" + line)  # Unity system
+                continue
+        if n_merged_reg:
+            if is_have_different_registry_merged_words(line):
+                local_removed_lines.append("MeW:\t" + line)  # Merged words
+                continue
+        if n_more_three_upcase:
+            if is_have_three_upcase(line):
+                local_removed_lines.append("UpC:\t" + line)  # Upcase str
+                continue
+        if n_underscore:
+            if is_have_underscore(line):
+                local_removed_lines.append("UnS:\t" + line)  # have underscore
+                continue
+
+        local_lines.append(line)
+
+    return local_lines, local_removed_lines
+
+
+def filter_texts(text_datas, *,
+                 h_symbols=True,
+                 n_system_str=True, n_merged_reg=True, n_more_three_upcase=True, n_underscore=True):
     removed_lines = []
     result_lines = []
 
-    for text in text_data:
-        local_lines = []
-        local_removed_lines = []
-
-        for line in text:
-            if h_symbols:
-                if is_have_only_numbers_or_symbols(line):
-                    local_removed_lines.append("OnS:\t" + line)  # don't have letter
-                    continue
-            if n_system_str:
-                if is_have_unity_system_string(line):
-                    local_removed_lines.append("USy:\t" + line)  # Unity system
-                    continue
-            if n_merged_reg:
-                if is_have_different_registry_merged_words(line):
-                    local_removed_lines.append("MeW:\t" + line)  # Merged words
-                    continue
-            if n_more_three_upcase:
-                if is_have_three_upcase(line):
-                    local_removed_lines.append("UpC:\t" + line)  # Upcase str
-                    continue
-            if n_underscore:
-                if is_have_underscore(line):
-                    local_removed_lines.append("UnS:\t" + line)  # have underscore
-                    continue
-
-            local_lines.append(line)
-
-        result_lines.append(local_lines)
-        removed_lines.append(local_removed_lines)
+    for text in text_datas:
+        temp_result, temp_removed = filter_text(text, h_symbols, n_system_str, n_merged_reg, n_more_three_upcase, n_underscore)
+        result_lines.append(temp_result)
+        removed_lines.append(temp_removed)
 
     return result_lines, removed_lines
 
@@ -97,18 +104,18 @@ def get_quotes_blocks_with_text(text_data, *, start_pattern=r""):
 
 
 def oxenfree_filter_resources(text_data):  # text_data is list of lists
-    return filter_text(text_data,
-                       h_symbols=True,
-                       n_system_str=True, n_merged_reg=True, n_more_three_upcase=False, n_underscore=True)
+    return filter_texts(text_data,
+                        h_symbols=True,
+                        n_system_str=True, n_merged_reg=True, n_more_three_upcase=False, n_underscore=True)
 
 
 def oxenfree_filter_lvl(text_data, *, start_str=r""):
     quotes_str, quotes_removed = get_quotes_blocks_with_text(text_data, start_pattern=start_str)
 
-    result_lines, removed_lines = filter_text(quotes_removed,
-                                              h_symbols=True,
-                                              n_system_str=True, n_merged_reg=False, n_more_three_upcase=True,
-                                              n_underscore=True)
+    result_lines, removed_lines = filter_texts(quotes_removed,
+                                               h_symbols=True,
+                                               n_system_str=True, n_merged_reg=False, n_more_three_upcase=True,
+                                               n_underscore=True)
     return quotes_str, result_lines, removed_lines
 
 
