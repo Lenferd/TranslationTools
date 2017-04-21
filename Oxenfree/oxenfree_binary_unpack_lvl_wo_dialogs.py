@@ -6,7 +6,6 @@
 #   Дата:       8.04.17
 #   Автор:      Lenferd (DeysonSH@gmail.com)
 
-# from BinaryParser import binaryReaderLib as binaryParser
 from Modules.BinaryParser import binary_parser as bparser
 from Modules.FilesOperation import find as ffind
 from Modules.FilesOperation import readFile as freader
