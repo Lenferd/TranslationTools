@@ -20,7 +20,7 @@ from Modules.FilesOperation.writeFile import create_directory
 # print(sys.path)
 
 def_data_fold = r"../Oxenfree_data/"
-def_dir = "../Oxenfree_data/test/"
+def_dir = "../Oxenfree_data/GOG-2.2/"
 
 if __name__ == '__main__':
 
@@ -34,8 +34,11 @@ if __name__ == '__main__':
 
     # On the first we should unpack resources files
 
-    os.system("python oxenfree_binary_unpack_resources.py " + dir_with_data);
-
+    print("Start resources unpack process")
+    os.system("python oxenfree_binary_unpack_resources.py " + dir_with_data)
+    print("Finish resources unpack")
     # Unpack lvl files
 
-    os.system("python oxenfree_binary_unpack_lvl.py " + dir_with_data);
+    print("Start lvl unpack process")
+    os.system("python oxenfree_binary_unpack_lvl.py " + dir_with_data)
+    print("Finish lvl unpack")

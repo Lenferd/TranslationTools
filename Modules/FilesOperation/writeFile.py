@@ -9,7 +9,7 @@
 
 import os
 
-from Modules import FilesOperation as ffind
+from Modules.FilesOperation import find as ffind
 
 directory = "/result/"
 

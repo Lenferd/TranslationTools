@@ -54,9 +54,9 @@ if __name__ == "__main__":
 
     # print data
     fwriter.write_data_only_one_writted_type_sorted(result_quo, ordering_result_quo, "result_quo_all",
-                                                    prefix=prefix_dialog, postfix="quotes", path=dir_path)
+                                                    prefix=prefix_dialog, path=dir_path)
     fwriter.write_data_to_many_file_witch_sorting_ordering(result_quo, ordering_result_quo, "result_quo",
-                                                           prefix=prefix_dialog, postfix="quotes", path=dir_path)
+                                                           prefix=prefix_dialog, path=dir_path)
 
     fwriter.write_data_only_one_writted_type_sorted(result, ordering_result, "lvl_result_all",
                                                     prefix=prefix_lvl, path=dir_path)
