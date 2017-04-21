@@ -39,8 +39,13 @@ def write_data_with_filename(data_list, filename_list, filename, *, prefix=""):
     outfile.close()
 
 
-def write_data_with_filename_wo_empty(data_list, filename_list, filename, *, prefix=''):
-    path = os.path.curdir + directory + prefix + '/'
+#   Запись с именами файлов игнорируя пустые блоки данных
+def write_data_with_filename_wo_empty(data_list, filename_list, filename, *, prefix='', path=""):
+    if path == "":
+        path = os.path.curdir + directory + prefix + '/'
+    else:
+        path += prefix + '/'
+
     create_directory(path)
 
     outfile = open(path + filename + ".txt", 'w', encoding="UTF8")
@@ -53,9 +58,19 @@ def write_data_with_filename_wo_empty(data_list, filename_list, filename, *, pre
     outfile.close()
 
 
-#   Не знаю как назвать, выводится тип файлов и только один раз, только для ОТСОРТИРОВАННЫХ
-def write_data_only_one_writted_type_sorted(data_list, filename_list_sorted, filename, *, prefix="", postfix=""):
-    path = os.path.curdir + directory + prefix + '/' + postfix + '/'
+"""   
+    # Не знаю как назвать, выводится тип файлов и только один раз
+    # Запись только в один файл?
+    # Только для ОТСОРТИРОВАННЫХ
+"""
+
+
+def write_data_only_one_writted_type_sorted(data_list, filename_list_sorted, filename, *, path="", prefix="", postfix=""):
+    if path == "":
+        path = os.path.curdir + directory + prefix + '/' + postfix + '/'
+    else:
+        path += prefix + '/' + postfix + '/'
+
     create_directory(path)
 
     outfile = open(path + filename + ".txt", 'w', encoding="UTF8")
@@ -75,8 +90,11 @@ def write_data_only_one_writted_type_sorted(data_list, filename_list_sorted, fil
 
 
 #   запиись во множество файлов. Каждый файл - для своего формата
-def write_data_to_many_file_witch_sorting_ordering(data_list, filename_list_sorted, filename, *, prefix="", postfix=""):
-    path = os.path.curdir + directory + prefix + '/' + postfix + '/'
+def write_data_to_many_file_witch_sorting_ordering(data_list, filename_list_sorted, filename, *, path="", prefix="", postfix=""):
+    if path == "":
+        path = os.path.curdir + directory + prefix + '/' + postfix + '/'
+    else:
+        path += prefix + '/' + postfix + '/'
     create_directory(path)
 
     # outfile = open(path + filename + ".txt", 'w')
@@ -107,8 +125,11 @@ def write_list_without_adding_newline(data, filename, *, prefix="", postfix=""):
     outfile.close()
 
 
-def write_list(data, filename, *, prefix="", postfix=""):
-    path = os.path.curdir + directory + prefix + '/' + postfix + '/'
+def write_list(data, filename, *, prefix="", postfix="", path=""):
+    if path == "":
+        path = os.path.curdir + directory + prefix + '/' + postfix + '/'
+    else:
+        path += prefix + '/' + postfix + '/'
     create_directory(path)
 
     outfile = open(path + filename + ".txt", 'w', encoding="UTF8")
@@ -118,8 +139,6 @@ def write_list(data, filename, *, prefix="", postfix=""):
 
 
 def create_directory(path):
-    try:
+    if not os.path.exists(path):
         os.makedirs(path)
-    except FileExistsError:
-        pass
 
