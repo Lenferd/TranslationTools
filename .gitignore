@@ -1,11 +1,6 @@
 .idea
 *.pyc
 *.so
-examples
-result
-files_info
-Tools/Done
-result_hex
-input
-Unpack_string/input
-Info
+
+Old_data
+Oxenfree_data
