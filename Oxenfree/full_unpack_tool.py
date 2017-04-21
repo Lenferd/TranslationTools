@@ -7,10 +7,19 @@
 #   Дата:       21.04.17
 #   Автор:      Lenferd (DeysonSH@gmail.com)
 
-import sys
 import os
-# import Oxenfree.oxenfree_binary_unpack_resources as of_resources
+import sys
+sys.path.insert(0, os.path.pardir)
 
+from Modules.FilesOperation.writeFile import create_directory
+
+# print(os.getcwdb())
+# print(os.getcwd())
+# print(os.getcwdu())
+# sys.path.append(os.getcwdu()/)
+# print(sys.path)
+
+def_data_fold = r"../Oxenfree_data/"
 def_dir = "../Oxenfree_data/test/"
 
 if __name__ == '__main__':
@@ -20,7 +29,8 @@ if __name__ == '__main__':
     if len(sys.argv) < 2:
         dir_with_data = def_dir
     else:
-        dir_with_data = sys.argv[1]
+        dir_with_data = def_data_fold + sys.argv[1] + "/"
+        # os.system("bash " + def_data_fold + "init.bat" + " " + sys.argv[1])
 
     # On the first we should unpack resources files
 

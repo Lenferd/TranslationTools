@@ -7,13 +7,15 @@
 #   Модифик:    21.04.17
 #   Автор:      Lenferd (DeysonSH@gmail.com)
 
+import os
+import sys
+sys.path.insert(0, os.path.pardir)
+
 from Modules.BinaryParser import binary_parser as bparser
 from Modules.FilesOperation import find as ffind
 from Modules.FilesOperation import readFile as freader
 from Modules.FilesOperation import writeFile as fwriter
 from Modules.TextOperations import text_filter
-
-import sys
 
 # filepatch = "/mnt/sda3/TT/TT_OF4/test"
 # filepatch = r"D:\TT\TT_OF4\LVL_COPIED2"
