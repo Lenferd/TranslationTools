@@ -25,3 +25,7 @@ if __name__ == '__main__':
     # On the first we should unpack resources files
 
     os.system("python oxenfree_binary_unpack_resources.py " + dir_with_data);
+
+    # Unpack lvl files
+
+    os.system("python oxenfree_binary_unpack_lvl.py " + dir_with_data);
