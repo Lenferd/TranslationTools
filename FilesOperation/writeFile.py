@@ -42,7 +42,7 @@ def write_data_with_filename_wo_empty(data_list, filename_list, filename, *, pre
     path = os.path.curdir + directory + prefix + '/'
     create_directory(path)
 
-    outfile = open(path + filename + ".txt", 'w')
+    outfile = open(path + filename + ".txt", 'w', encoding="UTF8")
     for i in range(len(data_list)):
         if len(data_list[i]) == 0:
             continue
@@ -57,7 +57,7 @@ def write_data_only_one_writted_type_sorted(data_list, filename_list_sorted, fil
     path = os.path.curdir + directory + prefix + '/' + postfix + '/'
     create_directory(path)
 
-    outfile = open(path + filename + ".txt", 'w')
+    outfile = open(path + filename + ".txt", 'w', encoding="UTF8")
 
     global_ftype = ''
     for i in range(len(data_list)):
@@ -87,7 +87,7 @@ def write_data_to_many_file_witch_sorting_ordering(data_list, filename_list_sort
         ftype = ffind.find_filetype(filename_list_sorted[i])
         if ftype != global_ftype:
             global_ftype = ftype
-            outfile = open(path + filename + "_" + global_ftype + ".txt", 'w')
+            outfile = open(path + filename + "_" + global_ftype + ".txt", 'w', encoding="UTF8")
         for line in data_list[i]:
             outfile.write(line + '\n')
     try:
@@ -100,7 +100,7 @@ def write_list_without_adding_newline(data, filename, *, prefix="", postfix=""):
     path = os.path.curdir + directory + prefix + '/' + postfix + '/'
     create_directory(path)
 
-    outfile = open(path + filename + ".txt", 'w')
+    outfile = open(path + filename + ".txt", 'w', encoding="UTF8")
     for line in data:
         outfile.write(line)
     outfile.close()
@@ -110,7 +110,7 @@ def write_list(data, filename, *, prefix="", postfix=""):
     path = os.path.curdir + directory + prefix + '/' + postfix + '/'
     create_directory(path)
 
-    outfile = open(path + filename + ".txt", 'w')
+    outfile = open(path + filename + ".txt", 'w', encoding="UTF8")
     for line in data:
         outfile.write(line + '\n')
     outfile.close()

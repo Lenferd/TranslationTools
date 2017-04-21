@@ -9,8 +9,8 @@
 
 file_original = 'Orig/orig.txt'
 file_translated = 'Transl/transl.txt'
-file_new = 'toTransl/result_dialog.txt'
-prefix = "lvl_dialog"
+file_new = 'toTransl/lvl_text_result_all.txt'
+prefix = "lvl_text"
 
 from FilesOperation import readFile, writeFile
 from TextOperations.find_text import is_have_russian_symbols

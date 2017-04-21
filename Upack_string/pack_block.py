@@ -6,14 +6,14 @@
 #   Дата:       10.04.17
 #   Автор:      Lenferd (DeysonSH@gmail.com)
 
-fileTranslated = 'TranslatedFileDialog.txt'
-fileToTransl = 'outP.txt'
-fileOriginal = 'Dialog.txt'
-out_file_name = ""
-
 from FilesOperation import readFile, writeFile
 from Upack_string import block_util
 
+fileTranslated = r'.\input\translated_dialog.txt'
+fileToTransl = r'.\input\all_quo_orig_block.txt'
+fileOriginal = r'.\input\result_dialog.txt'
+
+out_file_name = "translate_in_block_dialog"
 
 if __name__ == '__main__':
     dataOriginal = readFile.read_file_rstrip(fileOriginal)
@@ -30,16 +30,6 @@ if __name__ == '__main__':
                 if block_util.oxf_have_right_prefix(position, dataToTransl[j]):
                     dataToTransl[j] = dataToTransl[j].replace(dataOriginal[i], dataTransl[i])
             i += 1
-        dataToTransl[j] += '\n'
         j += 1
 
-    writeFile.write_list(out_file_name, dataToTransl)
-
-# def readFileP(filename):
-#     data = []
-#     infile = open(filename, 'r', encoding='UTF8')
-#     for line in infile:
-#         line = line.replace('\r', '')
-#         line = line.replace('\n', '')
-#         data.append(line)
-#     return data
+    writeFile.write_list(dataToTransl, out_file_name)

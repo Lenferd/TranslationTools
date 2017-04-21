@@ -15,11 +15,11 @@ from FilesOperation import find as ffind
 from Debug import tests
 
 # filepatch = "/mnt/sda3/TT/TT_OF4/test"
-filepatch = "/mnt/sda3/TT/TT_OF4/Lvl"
+filepatch = r"D:\TT\TT_OF4\LVL_COPIED2"
 # filepatch = "./examples"
 
 #   out path
-prefix = "lvl_to_transl3"     # folder in the result
+prefix = "lvl_to_transl3test"     # folder in the result
 postfix = "fileinfo"        # underfolder in the prefix folder (for file info)
 
 if __name__ == "__main__":
@@ -47,11 +47,15 @@ if __name__ == "__main__":
 
     fwriter.write_data_only_one_writted_type_sorted(result, ordering_result, "result_all", prefix=prefix)
     fwriter.write_data_to_many_file_witch_sorting_ordering(result, ordering_result, "result", prefix=prefix)
-
+    #
     fwriter.write_data_with_filename_wo_empty(removed, ordering_removed, "removed", prefix=prefix)
 
     # print filetype
-    fwriter.write_list(ffind.find_all_type(ordering_result_quo), "filetype", prefix=prefix, postfix=postfix)
+    fwriter.write_list(ffind.find_all_type(ordering_result), "filetype", prefix=prefix, postfix=postfix)
+    fwriter.write_list(ffind.find_all_type(ordering_removed), "filetype_rem", prefix=prefix, postfix=postfix)
+
+    empty_files_list = ffind.find_empty_files(result, ordering_result)
+    fwriter.write_list(empty_files_list, 'emptyRes', prefix=prefix, postfix=postfix)
 
     empty_files_list = ffind.find_empty_files(result_quo, ordering_result_quo)
-    fwriter.write_list(empty_files_list, 'empty', prefix=prefix, postfix=postfix)
+    fwriter.write_list(empty_files_list, 'emptyQuo', prefix=prefix, postfix=postfix)

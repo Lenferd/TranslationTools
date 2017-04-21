@@ -10,17 +10,20 @@
 def oxf_is_same_size(position, orig, string):
     i = position
     size = 0
-    while orig[i] != '\"' or orig[i + 1] != ',':
-        size += 1
-        i += 1
-    i -= 1
-    while orig[i] == ' ':
-        size -= 1
+    try:
+        while orig[i] != '\"' or orig[i + 1] != ',':
+            size += 1
+            i += 1
         i -= 1
-    if size == len(string):
-        return True
-    else:
-        return False
+        while orig[i] == ' ':
+            size -= 1
+            i -= 1
+        if size == len(string):
+            return True
+        else:
+            return False
+    except IndexError:
+        print(orig)
 
 
 def oxf_have_right_prefix(position, data):
