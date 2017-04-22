@@ -11,10 +11,11 @@
 import sys
 import os
 
+sys.path.insert(0, os.path.join("..", ".."))
+
 from Modules.FilesOperation import readFile, writeFile
 from Modules.TextOperations.find_text import is_have_russian_symbols
 
-sys.path.insert(0, os.path.join("..", ".."))
 # print(os.path.pardir)
 
 def_data_fold = r"Retranslate_data"
@@ -76,7 +77,7 @@ if __name__ == '__main__':
     if file_original.find(".txt") == -1 or file_translated.find(".txt") == -1 or file_new.find(".txt") == -1:
         print("Files should be in txt format!")
         exit(-2)
-    
+
     original_text = readFile.read_file_rstrip(file_original)
     translated_text = readFile.read_file_rstrip(file_translated)
     originalNew_text = readFile.read_file_rstrip(file_new)
