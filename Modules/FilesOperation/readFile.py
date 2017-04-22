@@ -35,6 +35,16 @@ def read_binary_files(files_list):
 
 def read_file_rstrip(filename):
     file = open(filename, 'r', encoding="UTF8")
-    data = [s.rstrip() for s in file.readlines()]
+    try:
+        data = [s.rstrip() for s in file.readlines()]
+    except UnicodeDecodeError:
+        print("Unicode decode error: 'utf-8' error")
+        try:
+            for line in file:
+                line.strip()
+        except UnicodeDecodeError:
+            print(line)
+            print(bytearray(line, encoding='utf8'))
+            exit(-3)
     file.close()
     return data
