@@ -16,13 +16,16 @@ import sys
 # filename = r"./input/test.json"
 # filename = r"./input/events.json"
 # filename = r"../../SunlessSea_data/test1/input_json/test.json"
-filename = r"../../SunlessSea_data/version1/input_json/events.json"
+def_data_fold = r"../../SunlessSea_data/version1/"
+
+dit_json = r"input_json/"
+dir_result_events = r"result_json/"
+dir_flags = r"input_flags/"
+
+name = r"events.json"
 # filename = r"../../SunlessSea_data/version1/input_json/events-norm.json"
 
-out_path = r"../../SunlessSea_data/test1/result_json/"
-key_list_file = r"../../SunlessSea_data/test1/input_flags/flags.txt"
-ignore_name_file = r"../../SunlessSea_data/test1/input_flags/ignore.txt"
-
+dir_with_data = ""
 
 def read_flags(file):
     result_dict = {}
@@ -71,19 +74,19 @@ def get_deep_data(data_dict, flags_l, ignore_l, lvl):
             # print(value)
             if key is None or value is None or type(key) is None:
                 continue
-            elif key in flags_l and value != "" and value not in ignore:
+            elif key in flags_l and value != "" and value not in ignore_l:
                 result_key.append(key)
                 result_value.append(value)
                 result_lvl.append(">" * lvl)
     return result_key, result_value, result_lvl
 
 
-if __name__ == '__main__':
+def unpack_file(dir_with_data, name):
 
-    if len(sys.argv) < 2:
-        pass
-    else:
-        filename = sys.argv[1]
+    key_list_file = dir_with_data + dir_flags + "flags.txt"
+    ignore_name_file = dir_with_data + dir_flags + "ignore.txt"
+    filename = dir_with_data + dit_json + name
+    out_path = dir_with_data + dir_result_events
 
     flags = read_flags(key_list_file)
     ignore = read_flags(ignore_name_file)
@@ -124,6 +127,16 @@ if __name__ == '__main__':
     #     for i in range(len(k)):
         # print(k, "\t", v)
 
-    outfile = open(out_path + "result.txt", 'w', encoding="UTF8")
+    outfile = open(out_path + filename.split("/")[-1].split(".")[0] + ".txt", 'w', encoding="UTF8")
     for k, v, l in zip(json_list[0], json_list[1], json_list[2]):
         outfile.write(l + "\t" + k + "\t" + v + '\n')
+
+
+if __name__ == '__main__':
+    if len(sys.argv) < 3:
+        dir_with_data = def_data_fold
+    else:
+        dir_with_data = sys.argv[1]
+        name = sys.argv[2]
+
+    unpack_file(dir_with_data, name)
