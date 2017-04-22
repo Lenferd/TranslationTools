@@ -123,9 +123,9 @@ def pack_file(dir_with_data, name):
     infile = open(filename_transl, "r", encoding="UTF8")
 
     for line in infile:
-        json_text_transl[0].append(line.split("\t")[0].rstrip())
-        json_text_transl[1].append(line.split("\t")[1].rstrip())
-        json_text_transl[2].append(line.split("\t")[2].rstrip())
+        json_text_transl[0].append(line.split("\t")[0].rstrip().replace('\\r', '\r').replace('\\n', "\n"))
+        json_text_transl[1].append(line.split("\t")[1].rstrip().replace('\\r', '\r').replace('\\n', "\n"))
+        json_text_transl[2].append(line.split("\t")[2].rstrip().replace('\\r', '\r').replace('\\n', "\n"))
 
     # Read orig text
 
@@ -133,9 +133,9 @@ def pack_file(dir_with_data, name):
     infile = open(filename_origin, "r", encoding="UTF8")
 
     for line in infile:
-        json_text_orig[0].append(line.split("\t")[0].rstrip())
-        json_text_orig[1].append(line.split("\t")[1].rstrip())
-        json_text_orig[2].append(line.split("\t")[2].rstrip())
+        json_text_orig[0].append(line.split("\t")[0].rstrip().replace('\\r', '\r').replace('\\n', "\n"))
+        json_text_orig[1].append(line.split("\t")[1].rstrip().replace('\\r', '\r').replace('\\n', "\n"))
+        json_text_orig[2].append(line.split("\t")[2].rstrip().replace('\\r', '\r').replace('\\n', "\n"))
 
     # Check
     if len(json_text_transl[0]) != len(json_text_orig[0]):
