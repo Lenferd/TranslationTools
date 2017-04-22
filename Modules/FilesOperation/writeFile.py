@@ -129,7 +129,8 @@ def write_list(data, filename, *, prefix="", postfix="", path=""):
     if path == "":
         path = os.path.curdir + directory + prefix + '/' + postfix + '/'
     else:
-        path += prefix + '/' + postfix + '/'
+        path = os.path.join(path, prefix, postfix)
+        # path += prefix + '/' + postfix + '/'
     create_directory(path)
 
     outfile = open(path + filename + ".txt", 'w', encoding="UTF8")
