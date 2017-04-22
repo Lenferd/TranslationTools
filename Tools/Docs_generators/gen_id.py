@@ -2,16 +2,17 @@
 #     print("R"+str(i))
 
 if __name__ == '__main__':
-    count_line = 2;
-    list_source = "'Resources-2'"
-    cell_orig = "D"
-    cell_transl = "C"
-    flag_concat_origin = "R2-"
-    flag_concat_transl = "R2-"
+    count_line = 24992;
+    list_source = "'events'"
+    cell_orig = "C"
+    cell_transl = "D"
+    flag_concat_origin = "Eo-"
+    flag_concat_transl = "Et-"
     for i in range(count_line):
-        print(r"=if(len(" + list_source + "!" + cell_transl + str(i) + " > 0;"
-              + 'CONCAT("' + flag_concat_origin + str(i) + ': ";' + list_source + '!' + cell_orig + str(i) + ");"
-              + 'CONCAT("' + flag_concat_transl + str(i) + ': ";' + list_source + '!' + cell_orig + str(i) + "))")
+        # print("E" + str(i))
+        print(r"=if(len(" + list_source + "!" + cell_transl + str(i) + ") > 0;"
+              + 'CONCAT("' + flag_concat_transl + str(i) + ': ";' + list_source + '!' + cell_transl + str(i) + ");"
+              + 'CONCAT("' + flag_concat_origin + str(i) + ': ";' + list_source + '!' + cell_orig + str(i) + "))")
 
         # no id
 
