@@ -73,6 +73,10 @@ if __name__ == '__main__':
     file_translated = os.path.join(dir_with_data, "input_translated_text", os.listdir(file_translated)[0])
     file_new = os.path.join(dir_with_data, "input_file_to_translate", os.listdir(file_new)[0])
 
+    if file_original.find(".txt") == -1 or file_translated.find(".txt") == -1 or file_new.find(".txt") == -1:
+        print("Files should be in txt format!")
+        exit(-2)
+    
     original_text = readFile.read_file_rstrip(file_original)
     translated_text = readFile.read_file_rstrip(file_translated)
     originalNew_text = readFile.read_file_rstrip(file_new)
