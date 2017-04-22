@@ -81,7 +81,7 @@ def get_deep_data(data_dict, flags_l, ignore_l, lvl):
                 continue
             elif key in flags_l and value != "" and value not in ignore_l:
                 result_key.append(key)
-                result_value.append(value)
+                result_value.append(value.replace('\r', '\\r').replace('\n', "\\n"))
                 result_lvl.append(">" * lvl)
     return result_key, result_value, result_lvl
 
