@@ -24,8 +24,12 @@ cd ${folder_name}
 # In
 mkdir input_json
 mkdir input_flags
+mkdir input_json_text
+mkdir input_json_text_orig
+
 # Out
 mkdir result_json
+mkdir result_json_bin
 
 echo "Press Enter to exit"
 read A
