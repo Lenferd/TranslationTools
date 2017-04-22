@@ -15,7 +15,7 @@ from Modules.FilesOperation.find import construct_file_three
 from Tools.Json_unpacker import json_unpack
 
 def_data_fold = r"../SunlessSea_data/"
-def_dir = "../SunlessSea_data/version2/"
+def_dir = "../SunlessSea_data/example/"
 
 if __name__ == '__main__':
 
