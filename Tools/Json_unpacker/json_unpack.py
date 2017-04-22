@@ -16,11 +16,12 @@ import sys
 # filename = r"./input/test.json"
 # filename = r"./input/events.json"
 # filename = r"../../SunlessSea_data/test1/input_json/test.json"
-# filename = r"../../SunlessSea_data/version1/input_json/events.json"
-filename = r"../../SunlessSea_data/version1/input_json/events-norm.json"
+filename = r"../../SunlessSea_data/version1/input_json/events.json"
+# filename = r"../../SunlessSea_data/version1/input_json/events-norm.json"
 
 out_path = r"../../SunlessSea_data/test1/result_json/"
 key_list_file = r"../../SunlessSea_data/test1/input_flags/flags.txt"
+ignore_name_file = r"../../SunlessSea_data/test1/input_flags/ignore.txt"
 
 
 def read_flags(file):
@@ -47,28 +48,34 @@ def read_flags(file):
     return result_dict
 
 
-def get_deep_data(data_dict, flags_l, lvl):
+def get_deep_data(data_dict, flags_l, ignore_l, lvl):
     result_key = []
     result_value = []
+    result_lvl = []
+
     for key, value in data_dict.items():
         # print(lvl, "   ", value, type(value))
         if type(value) is list:
             for i in range(len(value)):
-                temp_key, temp_val = get_deep_data(value[i], flags_l, lvl + 1)
+                temp_key, temp_val, temp_lvl = get_deep_data(value[i], flags_l, ignore_l, lvl + 1)
                 result_key.extend(temp_key)
                 result_value.extend(temp_val)
-        if type(value) is dict:
-            temp_key, temp_val = get_deep_data(value, flags_l, lvl+1)
+                result_lvl.extend(temp_lvl)
+
+        elif type(value) is dict:
+            temp_key, temp_val, temp_lvl = get_deep_data(value, flags_l, ignore_l, lvl + 1)
             result_key.extend(temp_key)
             result_value.extend(temp_val)
+            result_lvl.extend(temp_lvl)
         else:
             # print(value)
             if key is None or value is None or type(key) is None:
                 continue
-            elif key in flags_l and value != "":
+            elif key in flags_l and value != "" and value not in ignore:
                 result_key.append(key)
                 result_value.append(value)
-    return result_key, result_value
+                result_lvl.append(">" * lvl)
+    return result_key, result_value, result_lvl
 
 
 if __name__ == '__main__':
@@ -79,10 +86,20 @@ if __name__ == '__main__':
         filename = sys.argv[1]
 
     flags = read_flags(key_list_file)
+    ignore = read_flags(ignore_name_file)
+    # print(ignore)
+
     flags = flags.get(filename.split("/")[-1])
+    ignore = ignore.get(filename.split("/")[-1])
     if flags is None:
         print("Don't have flags for this file")
         exit(-1)
+    if ignore is not None:
+        print("Ignoring string: ", ignore)
+    else:
+        print("No ignored str")
+        ignore = []
+
     print("Flags for this file: ", flags)
 
     # read file
@@ -92,13 +109,14 @@ if __name__ == '__main__':
     # read as json
     j_obj = json.loads(names_list)
 
-    json_list = [["Key"], ["Value"]]
+    json_list = [["Key"], ["Value"], ["lvl"]]
     # print(json_list[1][0])
 
     for i in range(len(j_obj)):
-        temp_key, temp_val = get_deep_data(j_obj[i], flags, 0)
-        json_list[0] += temp_key
-        json_list[1] += temp_val
+        g_temp_key, g_temp_val, g_temp_lvl = get_deep_data(j_obj[i], flags, ignore, 1)
+        json_list[0] += g_temp_key
+        json_list[1] += g_temp_val
+        json_list[2] += g_temp_lvl
 
 
     # print(json_list[0])
@@ -107,5 +125,5 @@ if __name__ == '__main__':
         # print(k, "\t", v)
 
     outfile = open(out_path + "result.txt", 'w', encoding="UTF8")
-    for k, v in zip(json_list[0], json_list[1]):
-        outfile.write(k + "\t" + v + '\n')
+    for k, v, l in zip(json_list[0], json_list[1], json_list[2]):
+        outfile.write(l + "\t" + k + "\t" + v + '\n')
