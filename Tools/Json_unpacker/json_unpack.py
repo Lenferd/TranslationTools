@@ -11,16 +11,21 @@
 
 import json
 import sys
-# import os
+import os
+
+if os.name == "nt":
+    splitter = "\\"
+else:
+    splitter = "/"
 
 # filename = r"./input/test.json"
 # filename = r"./input/events.json"
 # filename = r"../../SunlessSea_data/test1/input_json/test.json"
 def_data_fold = r"../../SunlessSea_data/version1/"
 
-dit_json = r"input_json/"
-dir_result_events = r"result_json/"
-dir_flags = r"input_flags/"
+dit_json = r"input_json" + splitter
+dir_result_events = r"result_json" + splitter
+dir_flags = r"input_flags" + splitter
 
 name = r"events.json"
 # filename = r"../../SunlessSea_data/version1/input_json/events-norm.json"
@@ -90,10 +95,9 @@ def unpack_file(dir_with_data, name):
 
     flags = read_flags(key_list_file)
     ignore = read_flags(ignore_name_file)
-    # print(ignore)
 
-    flags = flags.get(filename.split("/")[-1])
-    ignore = ignore.get(filename.split("/")[-1])
+    flags = flags.get(filename.split(splitter)[-1])
+    ignore = ignore.get(filename.split(splitter)[-1])
     if flags is None:
         print("Don't have flags for this file")
         exit(-1)
@@ -127,7 +131,7 @@ def unpack_file(dir_with_data, name):
     #     for i in range(len(k)):
         # print(k, "\t", v)
 
-    outfile = open(out_path + filename.split("/")[-1].split(".")[0] + ".txt", 'w', encoding="UTF8")
+    outfile = open(out_path + filename.split(splitter)[-1].split(".")[0] + ".txt", 'w', encoding="UTF8")
     for k, v, l in zip(json_list[0], json_list[1], json_list[2]):
         outfile.write(l + "\t" + k + "\t" + v + '\n')
 
