@@ -11,6 +11,11 @@ import os
 import sys
 sys.path.insert(0, os.path.pardir)
 
+if os.name == "nt":
+    splitter = "\\"
+else:
+    splitter = "/"
+
 from Modules.FilesOperation.find import construct_file_three
 from Tools.Json_unpacker import json_unpack
 
@@ -30,8 +35,8 @@ if __name__ == '__main__':
     list_of_json_files = construct_file_three(dir_with_data + "/input_json")
 
     for file in list_of_json_files:
-        print("Unpack " + file.split("/")[-1])
-        json_unpack.unpack_file(dir_with_data, file.split("/")[-1])
+        print("Unpack " + file.split(splitter)[-1])
+        json_unpack.unpack_file(dir_with_data, file.split(splitter)[-1])
         print("Unpacking done")
         print("==============")
 
