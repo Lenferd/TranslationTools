@@ -11,12 +11,10 @@ if "%folder_name%" == "" (
 mkdir %folder_name%
 cd %folder_name%
 
-mkdir input_lvl
-mkdir input_resources
+mkdir input_json
+mkdir input_flags
 
-mkdir result_lvl
-mkdir result_dialogs
-mkdir result_resources
+mkdir result_json
 
 pause
 exit /B
