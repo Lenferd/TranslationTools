@@ -65,6 +65,17 @@ def construct_file_three(path, *, ignoring_directories=[]):
     return files_list
 
 
+def get_file_from_directory(fullpath):
+    if len(os.listdir(fullpath)) > 1:
+        print("There are many files, not one!")
+        exit(-1)
+    elif len(os.listdir(fullpath)) < 1:
+        print("No one files :(")
+        exit(-1)
+    else:
+        return os.path.join(fullpath, os.listdir(fullpath)[0])
+
+
 def atoi(text):
     return int(text) if text.isdigit() else text
 
