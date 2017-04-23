@@ -16,12 +16,13 @@ def find_filename(long_path):
 
 
 #   TODO не уверен, что он работает
+#   TODO Удалить к чертям, есть же os.path, чёртовы велосипеды
 def find_directory_name(long_path):
     buf = long_path[:long_path.rfind("/")]
     buf = buf[buf.rfind("/") + 1:]
     return buf
 
-
+#   TODO Удалить к чертям, есть же os.path, чёртовы велосипеды
 def find_directory_with_filename(long_path):
     return find_directory_name(long_path) + "/" + find_filename(long_path)
 
@@ -70,10 +71,23 @@ def get_file_from_directory(fullpath):
         print("There are many files, not one!")
         exit(-1)
     elif len(os.listdir(fullpath)) < 1:
-        print("No one files :(")
+        print("No one files find in " + fullpath + "    :(")
         exit(-1)
     else:
         return os.path.join(fullpath, os.listdir(fullpath)[0])
+
+
+# def get_path_with_directories(fullpath, cutter):
+#     basepath = cutter
+#     cutter = os.path.split(cutter)[-2]
+#     fullpath_cuttered = os.path.split(fullpath)
+#     i = len(fullpath_cuttered)
+#     added_str = ""
+#     print(fullpath, cutter)
+#     while fullpath_cuttered[i] != cutter:
+#         added_str = os.path.join(fullpath_cuttered[i], added_str)
+#         i -= 1
+#     return os.path.join(basepath, added_str)
 
 
 def atoi(text):
