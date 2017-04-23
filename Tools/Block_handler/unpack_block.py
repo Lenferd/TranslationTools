@@ -8,7 +8,7 @@
 
 files_directory = r'./input'
 
-from TextOperations import encoding_fix
+from Modules.TextOperations import encoding_fix
 
 from Modules.FilesOperation import readFile, writeFile, find
 from Modules.TextOperations import text_filter
