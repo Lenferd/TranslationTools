@@ -7,7 +7,7 @@
 #   Автор:      Lenferd (DeysonSH@gmail.com)
 
 from Modules.FilesOperation import readFile, writeFile
-from Tools.Upack_string import block_util
+from Tools.Block_handler import block_util
 
 fileTranslated = r'.\input\translated_dialog.txt'
 fileToTransl = r'.\input\all_quo_orig_block.txt'
