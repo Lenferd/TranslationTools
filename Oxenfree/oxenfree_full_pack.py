@@ -10,7 +10,7 @@
 import os
 import sys
 
-sys.path.insert(0, os.path.pardir)
+sys.path.insert(0, os.path.join(".."))
 
 from Modules.FilesOperation.find import get_file_from_directory
 

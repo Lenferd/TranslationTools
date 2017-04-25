@@ -10,6 +10,8 @@
 import sys
 import os
 
+sys.path.insert(0, os.path.join(".."))
+
 from Modules.FilesOperation import readFile, writeFile
 from Tools.Block_handler import block_util
 from Modules.TextOperations import encoding_fix
