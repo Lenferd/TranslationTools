@@ -133,7 +133,7 @@ def write_list(data, filename, *, prefix="", postfix="", path=""):
         # path += prefix + '/' + postfix + '/'
     create_directory(path)
 
-    outfile = open(path + filename + ".txt", 'w', encoding="UTF8")
+    outfile = open(os.path.join(path, filename) + ".txt", 'w', encoding="UTF8")
     for line in data:
         outfile.write(line + '\n')
     outfile.close()
