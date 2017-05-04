@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/Lenferd/TranslationTools.svg?branch=master)](https://travis-ci.org/Lenferd/TranslationTools)
 ### Комплекс инструментов для перевода
 
 В данный момент присутствует:
