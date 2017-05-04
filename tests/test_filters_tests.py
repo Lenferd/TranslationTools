@@ -15,9 +15,10 @@ class TestTextOperationsMethods(unittest.TestCase):
 
         self.assertTrue(text_filter.is_have_underscore(test_line))
 
-    # def test_fall_test(self):
-    #     self.assertTrue(1 == 2)
+    def test_get_true_for_system_str(self):
+        test_line = "Unity.sys.test"
 
-    # de
+        self.assertTrue(text_filter.is_have_unity_system_string(test_line))
+
 if __name__ == '__main__':
     unittest.main()
