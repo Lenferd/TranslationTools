@@ -73,7 +73,7 @@ def deep_data_translate(data_dict, flags_l, ignore_l, lvl, orig, transl):
             elif key in flags_l and value != "" and value not in ignore_l:
                 # print(value)
                 # print(orig[2])
-                if value in orig[2]:
+                if value.rstrip() in orig[2]:
                     # print("???")
                     # print(value)
                     index = orig[2].index(value)
