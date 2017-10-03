@@ -76,7 +76,7 @@ def deep_data_translate(data_dict, flags_l, ignore_l, lvl, orig, transl):
                 if value.rstrip() in orig[2]:
                     # print("???")
                     # print(value)
-                    index = orig[2].index(value)
+                    index = orig[2].index(value.rstrip())
                     if key == transl[1][index] and ">" * lvl == transl[0][index]:
                         # print("yess")
                         data_dict.update({key: transl[2].pop(index)})
