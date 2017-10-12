@@ -59,33 +59,36 @@ def read_flags(file):
 
 
 def deep_data_translate(data_dict, flags_l, ignore_l, lvl, orig, transl):
-    for key, value in data_dict.items():
-        # print(lvl, "   ", value, type(value))
-        if type(value) is list:
-            for i in range(len(value)):
-                deep_data_translate(value[i], flags_l, ignore_l, lvl + 1, orig, transl)
+    if type(data_dict) is dict:
+        for key, value in data_dict.items():
+            # print(lvl, "   ", value, type(value))
+            if type(value) is list:
+                for i in range(len(value)):
+                    deep_data_translate(value[i], flags_l, ignore_l, lvl + 1, orig, transl)
 
-        elif type(value) is dict:
-            deep_data_translate(value, flags_l, ignore_l, lvl + 1, orig, transl)
-        else:
-            if key is None or value is None or type(key) is None:
-                continue
-            elif key in flags_l and value != "" and value not in ignore_l:
-                # print(value)
-                # print(orig[2])
-                if value.rstrip() in orig[2]:
-                    # print("???")
+            elif type(value) is dict:
+                deep_data_translate(value, flags_l, ignore_l, lvl + 1, orig, transl)
+            else:
+                if key is None or value is None or type(key) is None:
+                    continue
+                elif key in flags_l and value != "" and value not in ignore_l:
                     # print(value)
-                    index = orig[2].index(value.rstrip())
-                    if key == transl[1][index] and ">" * lvl == transl[0][index]:
-                        # print("yess")
-                        data_dict.update({key: transl[2].pop(index)})
-                        orig[0].pop(index)
-                        orig[1].pop(index)
-                        orig[2].pop(index)
-                        transl[0].pop(index)
-                        transl[1].pop(index)
-                        # lvl.pop(index)
+                    # print(orig[2])
+                    if value.rstrip() in orig[2]:
+                        # print("???")
+                        # print(value)
+                        index = orig[2].index(value.rstrip())
+                        if key == transl[1][index] and ">" * lvl == transl[0][index]:
+                            # print("yess")
+                            data_dict.update({key: transl[2].pop(index)})
+                            orig[0].pop(index)
+                            orig[1].pop(index)
+                            orig[2].pop(index)
+                            transl[0].pop(index)
+                            transl[1].pop(index)
+                            # lvl.pop(index)
+    else:
+        print(data_dict)
 
 
 def pack_file(dir_with_data, name):

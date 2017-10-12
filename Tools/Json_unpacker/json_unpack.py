@@ -61,6 +61,10 @@ def get_deep_data(data_dict, flags_l, ignore_l, lvl):
     result_value = []
     result_lvl = []
 
+    if type(data_dict) is not dict:
+        print(data_dict)
+        return result_key, result_value, result_lvl
+
     for key, value in data_dict.items():
         # print(lvl, "   ", value, type(value))
         if type(value) is list:
