@@ -80,6 +80,7 @@ def deep_data_translate(data_dict, flags_l, ignore_l, lvl, orig, transl):
                         index = orig[2].index(value.rstrip())
                         if key == transl[1][index] and ">" * lvl == transl[0][index]:
                             # print("yess")
+                            # print(transl[2][index])
                             data_dict.update({key: transl[2].pop(index)})
                             orig[0].pop(index)
                             orig[1].pop(index)
@@ -126,19 +127,21 @@ def pack_file(dir_with_data, name):
     infile = open(filename_transl, "r", encoding="UTF8")
 
     for line in infile:
-        json_text_transl[0].append(line.split("\t")[0].rstrip().replace('\\r', '\r').replace('\\n', "\n"))
-        json_text_transl[1].append(line.split("\t")[1].rstrip().replace('\\r', '\r').replace('\\n', "\n"))
-        json_text_transl[2].append(line.split("\t")[2].rstrip().replace('\\r', '\r').replace('\\n', "\n"))
+        json_text_transl[0].append(line.split("\t")[0].rstrip().replace('\\r', '\r').replace('\\n', "\n").replace('\\t', "\t"))
+        json_text_transl[1].append(line.split("\t")[1].rstrip().replace('\\r', '\r').replace('\\n', "\n").replace('\\t', "\t"))
+        json_text_transl[2].append(line.split("\t")[2].rstrip().replace('\\r', '\r').replace('\\n', "\n").replace('\\t', "\t"))
 
+    # for line in json_text_transl[2]:
+    #     print(line)
     # Read orig text
 
     json_text_orig = [["Key"], ["Value"], ["lvl"]]
     infile = open(filename_origin, "r", encoding="UTF8")
 
     for line in infile:
-        json_text_orig[0].append(line.split("\t")[0].rstrip().replace('\\r', '\r').replace('\\n', "\n"))
-        json_text_orig[1].append(line.split("\t")[1].rstrip().replace('\\r', '\r').replace('\\n', "\n"))
-        json_text_orig[2].append(line.split("\t")[2].rstrip().replace('\\r', '\r').replace('\\n', "\n"))
+        json_text_orig[0].append(line.split("\t")[0].rstrip().replace('\\r', '\r').replace('\\n', "\n").replace('\\t', "\t"))
+        json_text_orig[1].append(line.split("\t")[1].rstrip().replace('\\r', '\r').replace('\\n', "\n").replace('\\t', "\t"))
+        json_text_orig[2].append(line.split("\t")[2].rstrip().replace('\\r', '\r').replace('\\n', "\n").replace('\\t', "\t"))
 
     # Check
     if len(json_text_transl[0]) != len(json_text_orig[0]):
@@ -157,10 +160,10 @@ def pack_file(dir_with_data, name):
     for i in range(len(j_obj)):
         deep_data_translate(j_obj[i], flags, ignore, 1, json_text_orig, json_text_transl)
 
-    outfile = open(os.path.join(out_path, "events.json"), 'w', encoding="UTF8")
+    outfile = open(os.path.join(out_path, name +".json"), 'w', encoding="UTF8")
     outfile.write(json.dumps(j_obj, ensure_ascii=False))
 
-    outfile = open(os.path.join(out_path, "events_clean.json"), 'w', encoding="UTF8")
+    outfile = open(os.path.join(out_path, name + "_clean.json"), 'w', encoding="UTF8")
     outfile.write(json.dumps(j_obj, sort_keys=True, indent=4, ensure_ascii=False))
 
 if __name__ == '__main__':
