@@ -74,15 +74,15 @@ class JsonPack:
         self.key_list_file = os.path.join(_dir_with_data, dir_flags, "flags.txt")
         self.ignore_name_file = os.path.join(_dir_with_data, dir_flags, "ignore.txt")
         self.filename_transl = os.path.join(_dir_with_data, dir_json_text, _name + '.txt')
-        self.filename_origin = os.path.join(_dir_with_data, dir_json_text_orig, _name, '.txt')
-        self.filename_json = os.path.join(_dir_with_data, dir_json, _name, '.json')
+        self.filename_origin = os.path.join(_dir_with_data, dir_json_text_orig, _name + '.txt')
+        self.filename_json = os.path.join(_dir_with_data, dir_json, _name + '.json')
         self.out_path = os.path.join(_dir_with_data, dir_result_json)
 
         self.flags = self.read_flags(self.key_list_file)
         self.ignore = self.read_flags(self.ignore_name_file)
 
-        self.flags = self.flags.get(self.filename_json.split(splitter)[-1])
-        self.ignore = self.ignore.get(self.filename_json.split(splitter)[-1])
+        self.flags = self.flags.get(os.path.basename(self.filename_json))
+        self.ignore = self.ignore.get(os.path.basename(self.filename_json))
 
         if self.flags is None:
             print("Don't have flags for this file")

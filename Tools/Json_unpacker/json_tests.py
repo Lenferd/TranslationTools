@@ -12,7 +12,7 @@ from Tools.Json_unpacker.json_pack import pack_file
 class TestPackJsonFiles(unittest.TestCase):
 
     pack = JsonPack()
-    test_dir = "tests"
+    test_dir = os.path.abspath(os.path.join(".","tests"))
     name = "events"
 
     def setUp(self):
@@ -34,7 +34,7 @@ class TestPackJsonModules(unittest.TestCase):
     json_text_orig = 0
     json_text_transl = 0
 
-    test_dir = "tests"
+    test_dir = os.path.abspath(os.path.join(".", "tests"))
 
     def test_retranslate(self):
         json_pack = JsonPack()
