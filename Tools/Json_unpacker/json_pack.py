@@ -22,12 +22,12 @@ else:
 # filename = r"./input/events.json"
 # filename = r"../../SunlessSea_data/test1/input_json/test.json"
 def_data_fold = r"../../SunlessSea_data/version1/"
-
-dir_json = r"input_json" + splitter
-dir_json_text = r"input_json_text" + splitter
-dir_json_text_orig = r"input_json_text_orig" + splitter
+#
+dir_json = r"input_json"
+dir_json_text = r"input_json_text"
+dir_json_text_orig = r"input_json_text_orig"
 dir_result_json = "result_json_bin"
-dir_flags = r"input_flags" + splitter
+dir_flags = r"input_flags"
 
 # name = r"events.json"
 # filename = r"../../SunlessSea_data/version1/input_json/events-norm.json"
@@ -71,11 +71,11 @@ class JsonPack:
         print(_dir_with_data)
         print(_name)
         self.name = _name
-        self.key_list_file = _dir_with_data + dir_flags + "flags.txt"
-        self.ignore_name_file = _dir_with_data + dir_flags + "ignore.txt"
+        self.key_list_file = os.path.join(_dir_with_data, dir_flags, "flags.txt")
+        self.ignore_name_file = os.path.join(_dir_with_data, dir_flags, "ignore.txt")
         self.filename_transl = os.path.join(_dir_with_data, dir_json_text, _name + '.txt')
-        self.filename_origin = _dir_with_data + dir_json_text_orig + _name + '.txt'
-        self.filename_json = _dir_with_data + dir_json + _name + '.json'
+        self.filename_origin = os.path.join(_dir_with_data, dir_json_text_orig, _name, '.txt')
+        self.filename_json = os.path.join(_dir_with_data, dir_json, _name, '.json')
         self.out_path = os.path.join(_dir_with_data, dir_result_json)
 
         self.flags = self.read_flags(self.key_list_file)
