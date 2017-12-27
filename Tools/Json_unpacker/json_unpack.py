@@ -32,6 +32,7 @@ name = r"events.json"
 
 dir_with_data = ""
 
+
 def read_flags(file):
     result_dict = {}
     infile = open(file, "r", encoding="UTF8")
@@ -60,6 +61,10 @@ def get_deep_data(data_dict, flags_l, ignore_l, lvl):
     result_key = []
     result_value = []
     result_lvl = []
+
+    if type(data_dict) is not dict:
+        print(data_dict)
+        return result_key, result_value, result_lvl
 
     for key, value in data_dict.items():
         # print(lvl, "   ", value, type(value))
@@ -133,7 +138,7 @@ def unpack_file(dir_with_data, name):
 
     outfile = open(out_path + filename.split(splitter)[-1].split(".")[0] + ".txt", 'w', encoding="UTF8")
     for k, v, l in zip(json_list[0], json_list[1], json_list[2]):
-        outfile.write(l + "\t" + k + "\t" + v + '\n')
+        outfile.write(l + "\t" + k + "\t" + v.replace('\t', "\\t") + '\n')
 
 
 if __name__ == '__main__':
