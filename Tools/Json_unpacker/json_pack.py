@@ -202,25 +202,25 @@ class JsonPack:
                     # find correct value to translate
                     elif key in flags_l and value != "" and value not in ignore_l:
                         # find all index in original list
-                        indexs = [i for i, val in enumerate(_orig[2]) if val == value.rstrip()]
-                        # print(value)
-                        # print(indexs)
-                        if len(indexs) > 0:
-                        # if value.rstrip() in orig[2]:
-                            # print("???")
-                            # print(value)
-                            # index = orig[2].index(value.rstrip())
-                            for index in indexs:
-                                if key == _trans[1][index] and ">" * lvl == _trans[0][index]:
-                                    # print("yess")
-                                    # print(transl[2][index])
-                                    data_dict.update({key:  _trans[2].pop(index)})
-                                    _orig[0].pop(index)
-                                    _orig[1].pop(index)
-                                    _orig[2].pop(index)
-                                    _trans[0].pop(index)
-                                    _trans[1].pop(index)
-                                    break
+                        padding = 0
+                        while True:
+                            try:
+                                index = _orig[2].index(value.rstrip(), padding)
+                                padding = index + 1
+                                # print("padding {}".format(padding))
+                                # print("index {}".format(index))
+                            except ValueError:
+                                break
+                            if key == _trans[1][index] and ">" * lvl == _trans[0][index]:
+                                # print("yess")
+                                # print(transl[2][index])
+                                data_dict.update({key:  _trans[2].pop(index)})
+                                _orig[0].pop(index)
+                                _orig[1].pop(index)
+                                _orig[2].pop(index)
+                                _trans[0].pop(index)
+                                _trans[1].pop(index)
+                                break
         else:
             print(data_dict)
 

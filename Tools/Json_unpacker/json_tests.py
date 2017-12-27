@@ -23,6 +23,7 @@ class TestPackJsonFiles(unittest.TestCase):
     def test_file_print_not_translated(self):
         self.pack.translate()
         self.pack.write_out_not_translated()
+        self.pack.write_out()
 
 
 class TestPackJsonModules(unittest.TestCase):
