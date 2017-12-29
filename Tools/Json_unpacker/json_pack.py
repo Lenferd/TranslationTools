@@ -92,6 +92,7 @@ class JsonPack:
             print("Ignoring string: ", self.ignore)
         else:
             print("No ignored str")
+            self.ignore = []
 
         print("Flags for this file: ", self.flags)
 
