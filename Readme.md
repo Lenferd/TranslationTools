@@ -1,8 +1,10 @@
 [![Build Status](https://travis-ci.org/Lenferd/TranslationTools.svg?branch=master)](https://travis-ci.org/Lenferd/TranslationTools)
+
+Translation Tools for Sunless Sea and Oxenfree. If you are interested in this tool, feel free to ask me (DeysonSH@gmail.com)
+
 ### Комплекс инструментов для перевода
 
 В данный момент присутствует:
-
 1. Распаковка и запаковка бинарных архивов `unity` (целевая игра - Oxenfree)  
     Подробная инструкция в папке Oxenfree
 2. Распаковка и запаковка `json` файлов (целевая игра - Sunless Sea)  
