@@ -1,0 +1,1 @@
+ildasm.exe Sunless.Game.dll /out=Sunless.Game.il
