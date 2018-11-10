@@ -39,7 +39,7 @@ def main():
     file_orig = find.get_file_from_directory("input_origin_il")
     file_transl = find.get_file_from_directory("input_translated_il")
 
-    with open(file_il, 'r', encoding="CP1251") as file:
+    with open(file_il, 'r', encoding="utf_16") as file:
         data = file.read()
     assert(len(data) != 0)
     data = replacePlus(data)
