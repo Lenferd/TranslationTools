@@ -42,7 +42,7 @@ def unpackText(text):
 def main():
     filename = find.get_file_from_directory(directory)
 
-    with open(filename, 'r', encoding="CP1251") as file:
+    with open(filename, 'r', encoding="utf_16") as file:
         data = file.read()
 
     result_data = unpackText(data)

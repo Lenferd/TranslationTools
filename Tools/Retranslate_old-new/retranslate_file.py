@@ -10,7 +10,7 @@
 
 import sys
 import os
-
+import copy
 sys.path.insert(0, os.path.join("..", ".."))
 
 from Modules.FilesOperation import readFile, writeFile
@@ -28,9 +28,11 @@ def_dir = os.path.join("Retranslate_data", "example")
 # prefix = "lvl_text"
 
 
-def find_text(original_data, translated_data, originalNew_data):
+def find_text(_original_data, _translated_data, _originalNew_data, copyOriginal=0):
     result_data = []
-
+    original_data = copy.copy(_original_data)
+    translated_data = copy.copy(_translated_data)
+    originalNew_data = _originalNew_data
     for line in originalNew_data:
         i = 0
         while i < len(original_data):
@@ -39,12 +41,18 @@ def find_text(original_data, translated_data, originalNew_data):
                     result_data.append(translated_data.pop(i))
                     original_data.pop(i)
                 else:
-                    result_data.append("")
+                    if copyOriginal:
+                        result_data.append(line)
+                    else:
+                        result_data.append("")
                     translated_data.pop(i)
                     original_data.pop(i)
                 break
             elif i + 1 == len(original_data):
-                result_data.append("")
+                if copyOriginal:
+                    result_data.append(line)
+                else:
+                    result_data.append("")
             i += 1
 
     return result_data, original_data, translated_data
@@ -85,7 +93,11 @@ if __name__ == '__main__':
     translated_data, original_data_old, translated_data_old = \
         find_text(original_text, translated_text, originalNew_text)
 
+    translated_data_with_orig, temp1, temp2 = \
+        find_text(original_text, translated_text, originalNew_text, 1)
+
     output_path = os.path.join(dir_with_data, "result_translated")
-    writeFile.write_list(translated_data, os.path.basename(file_new).split(".")[0], path=output_path)
+    writeFile.write_list(translated_data, os.path.basename(file_new).split(".")[0] + "_wo_originals", path=output_path)
+    writeFile.write_list(translated_data_with_orig, os.path.basename(file_new).split(".")[0], path=output_path)
     writeFile.write_list(original_data_old, "origNotFound", path=output_path)
     writeFile.write_list(translated_data_old, "translNotFound", path=output_path)
